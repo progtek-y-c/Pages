@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>שליחת ארוחה לשרת</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.box {
+    background: #fff;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    text-align: center;
+}
+textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
+    padding: 5px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+button:hover {
+    background: #218838;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h3>עדכון ארוחה</h3>
+    <textarea id="meal" placeholder="הכנס כאן את ארוחת הצהריים"></textarea>
+    <button onclick="sendMeal()">שליחה</button>
+</div>
+
+<script>
+// סיסמה מוטמעת
+const PASSWORD = '1'; 
+// כתובת השרת
+const API_URL = 'https://12.a0001.net/57.php?meal=';
+
+function sendMeal() {
+    const pwd = prompt('סיסמה');
+    if (pwd !== PASSWORD) {
+        alert('סיסמה שגויה');
+        return;
+    }
+
+    const meal = document.getElementById('meal').value.trim();
+    if (!meal) {
+        alert('אנא הכנס ארוחה');
+        return;
+    }
+
+    // שליחה מיידית על ידי שינוי כתובת הדפדפן
+    window.location.href = API_URL + encodeURIComponent(meal);
+}
+</script>
+
+</body>
+</html>
